@@ -1,0 +1,580 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Sep 26, 2024 at 09:48 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `db_bimbingan`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `dos_id` int(11) NOT NULL,
+  `mhs_id` int(11) NOT NULL,
+  `NIK` varchar(128) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `no_telpon` varchar(128) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `tanda_tangan_digital` varchar(128) NOT NULL,
+  `research_interest` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `dos_id`, `mhs_id`, `NIK`, `name`, `no_telpon`, `email`, `tanda_tangan_digital`, `research_interest`) VALUES
+(3, 12, 0, '103.75.056', 'Dini Hamidin, S.Si.,MBA., M.T.', '6281320490787', 'dinihamidin@poltekpos.ac.id ', 'Tanda Tangan Dini Hamidin, S.Si.,MBA., M.T.png', ''),
+(9, 18, 0, '102.73.044', 'Supriady, S.T., M.T.', '6282120581473', 'supriady@poltekpos.ac.id ', 'Tanda Tangan Supriady, S.T., M.T.png', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `berkas_bimbingan`
+--
+
+CREATE TABLE `berkas_bimbingan` (
+  `id` int(11) NOT NULL,
+  `berkas_bimbingan_id` int(11) NOT NULL,
+  `tanggal` varchar(128) NOT NULL,
+  `materi` varchar(128) NOT NULL,
+  `paraf_dosen` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bimbingan`
+--
+
+CREATE TABLE `bimbingan` (
+  `id` int(11) NOT NULL,
+  `dos_id` int(11) NOT NULL,
+  `mhs_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mhs_aktif`
+--
+
+CREATE TABLE `mhs_aktif` (
+  `id` int(11) NOT NULL,
+  `npm` int(11) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `kelas` varchar(128) NOT NULL,
+  `status` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mhs_aktif`
+--
+
+INSERT INTO `mhs_aktif` (`id`, `npm`, `name`, `kelas`, `status`) VALUES
+(7, 1193008, 'Dedi Hidayat Siregar', 'D3 Teknik Informatika 3A', 'Mahasiswa Aktif'),
+(12, 1193014, 'Mahfud Fauzi', 'D3 Teknik Informatika 3A', 'Mahasiswa Aktif');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status`
+--
+
+CREATE TABLE `status` (
+  `id` int(11) NOT NULL,
+  `status` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`id`, `status`) VALUES
+(1, 'Belum terkumpul'),
+(2, 'Sudah terkumpul');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status_judul`
+--
+
+CREATE TABLE `status_judul` (
+  `id` int(11) NOT NULL,
+  `status` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status_judul`
+--
+
+INSERT INTO `status_judul` (`id`, `status`) VALUES
+(1, 'Judul belum di acc'),
+(2, 'Judul telah di acc');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status_proposal`
+--
+
+CREATE TABLE `status_proposal` (
+  `id` int(11) NOT NULL,
+  `status` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status_proposal`
+--
+
+INSERT INTO `status_proposal` (`id`, `status`) VALUES
+(1, 'Belum terkumpul'),
+(2, 'Sudah terkumpul');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status_surat`
+--
+
+CREATE TABLE `status_surat` (
+  `id` int(11) NOT NULL,
+  `status` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status_surat`
+--
+
+INSERT INTO `status_surat` (`id`, `status`) VALUES
+(1, 'Belum disetujui'),
+(2, 'Sudah disetujui');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `user_id` varchar(11) NOT NULL,
+  `mhs_id` int(11) NOT NULL,
+  `dos_id` int(11) NOT NULL,
+  `NIK` varchar(128) NOT NULL,
+  `tanda_tangan` varchar(128) NOT NULL,
+  `tanda_tanga_digital_mhs_1` varchar(128) NOT NULL,
+  `tanda_tanga_digital_mhs_2` varchar(128) NOT NULL,
+  `status_surat_id` int(2) NOT NULL,
+  `tanggal_surat` varchar(128) NOT NULL,
+  `status_judul` int(11) NOT NULL,
+  `persentase_laporan` varchar(128) NOT NULL,
+  `persentase_apliksai` varchar(128) NOT NULL,
+  `data_id` int(11) NOT NULL,
+  `name_mhs_1` varchar(128) NOT NULL,
+  `npm_mhs_1` varchar(128) NOT NULL,
+  `name_mhs_2` varchar(128) NOT NULL,
+  `npm_mhs_2` varchar(128) NOT NULL,
+  `kelas_mhs_1` varchar(128) NOT NULL,
+  `kelas_mhs_2` varchar(128) DEFAULT NULL,
+  `no_telpon_mhs_1` varchar(128) NOT NULL,
+  `no_telpon_mhs_2` varchar(128) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `date_created` int(11) NOT NULL,
+  `name_cor` varchar(128) NOT NULL,
+  `email_cor` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `role_id`, `user_id`, `mhs_id`, `dos_id`, `NIK`, `tanda_tangan`, `tanda_tanga_digital_mhs_1`, `tanda_tanga_digital_mhs_2`, `status_surat_id`, `tanggal_surat`, `status_judul`, `persentase_laporan`, `persentase_apliksai`, `data_id`, `name_mhs_1`, `npm_mhs_1`, `name_mhs_2`, `npm_mhs_2`, `kelas_mhs_1`, `kelas_mhs_2`, `no_telpon_mhs_1`, `no_telpon_mhs_2`, `password`, `date_created`, `name_cor`, `email_cor`) VALUES
+(18, 1, 'admin', 0, 0, '105.76.082', '', '', '', 0, '', 0, '', '', 4, '', '', '', '', '', '', '', '', '$2y$10$7dN5zrYhA2OdWUHZHINWj.oi.2xMRYp7bCZyJaTzq1cb2xu47/H9q', 1641187637, 'Kasep.M.Kom', 'kasep@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_access_menu`
+--
+
+CREATE TABLE `user_access_menu` (
+  `id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_access_menu`
+--
+
+INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
+(1, 1, 1),
+(2, 1, 0),
+(3, 1, 0),
+(5, 1, 14),
+(6, 1, 16),
+(7, 1, 17),
+(8, 2, 2),
+(9, 2, 8),
+(10, 2, 12),
+(11, 2, 0),
+(12, 2, 18),
+(13, 3, 3),
+(14, 3, 5),
+(15, 3, 7),
+(16, 3, 9),
+(17, 3, 11),
+(18, 3, 13),
+(19, 3, 19);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_data`
+--
+
+CREATE TABLE `user_data` (
+  `id` int(11) NOT NULL,
+  `judul_proyek` varchar(500) NOT NULL,
+  `keterangan_judul` varchar(128) NOT NULL,
+  `katagori_proyek` varchar(128) NOT NULL,
+  `proposal_proyek` varchar(500) NOT NULL,
+  `laporan_proyek` varchar(500) NOT NULL,
+  `status_laporan_id` int(2) NOT NULL,
+  `status_proposal_id` int(2) NOT NULL,
+  `berkas_bimbingan_id` varchar(128) NOT NULL,
+  `surat_izin_sidang` varchar(128) NOT NULL,
+  `tanggal_pengumpulan_proposal` varchar(128) NOT NULL,
+  `data_id` int(11) NOT NULL,
+  `cor_id` int(11) NOT NULL,
+  `tanggal_pengumpulan_laporan` varchar(128) DEFAULT NULL,
+  `batas_tanggal_bimbingan` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_data`
+--
+
+INSERT INTO `user_data` (`id`, `judul_proyek`, `keterangan_judul`, `katagori_proyek`, `proposal_proyek`, `laporan_proyek`, `status_laporan_id`, `status_proposal_id`, `berkas_bimbingan_id`, `surat_izin_sidang`, `tanggal_pengumpulan_proposal`, `data_id`, `cor_id`, `tanggal_pengumpulan_laporan`, `batas_tanggal_bimbingan`) VALUES
+(17, '', '', '', '', '', 0, 0, '', '', '', 4, 1, '', ''),
+(34, '', ' ', 'Proyek 2', '', '', 1, 1, '21', '', '', 21, 1, NULL, ''),
+(35, '', '', 'Proyek 2', '', '', 1, 1, '22', '', '', 22, 1, NULL, ''),
+(36, '', '', 'Proyek 2', '', '', 1, 1, '23', '', '', 23, 1, NULL, ''),
+(37, '', '', 'Proyek 2', '', '', 1, 1, '24', '', '', 24, 1, NULL, ''),
+(38, '', '', 'Proyek 2', '', '', 1, 1, '25', '', '', 25, 1, NULL, ''),
+(44, 'Project Robot pertanian', 'Project Robot pertanian', 'Proyek 2', 'PDF1.pdf', '', 1, 2, '26', '', '', 26, 1, NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_menu`
+--
+
+CREATE TABLE `user_menu` (
+  `id` int(11) NOT NULL,
+  `menu` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_menu`
+--
+
+INSERT INTO `user_menu` (`id`, `menu`) VALUES
+(1, 'Dashboard'),
+(2, 'Dashboard'),
+(3, 'Dashboard'),
+(4, 'Pedoman'),
+(5, 'Pedoman'),
+(6, 'Template Laporan'),
+(7, 'Template Laporan'),
+(8, 'Bimbingan'),
+(9, 'Bimbingan'),
+(10, 'Form Pengumpulan'),
+(11, 'Form Pengumpulan'),
+(12, 'Izin Sidang'),
+(13, 'Izin Sidang'),
+(14, 'Data Master'),
+(15, 'Penilaian'),
+(16, 'Data Sub Master'),
+(17, 'Setting'),
+(18, 'Setting'),
+(19, 'Setting');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_role`
+--
+
+CREATE TABLE `user_role` (
+  `id` int(11) NOT NULL,
+  `role` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_role`
+--
+
+INSERT INTO `user_role` (`id`, `role`) VALUES
+(1, 'Koordinator'),
+(2, 'Dosen'),
+(3, 'Mahasiswa');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_sub_menu`
+--
+
+CREATE TABLE `user_sub_menu` (
+  `id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL,
+  `title` varchar(128) NOT NULL,
+  `url` varchar(128) NOT NULL,
+  `is_active` int(1) NOT NULL,
+  `icon` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_sub_menu`
+--
+
+INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `is_active`, `icon`) VALUES
+(20, 1, 'Home', 'cordinator', 1, 'fa fa-fw fa-user-circle'),
+(21, 2, 'Home', 'dosen', 1, 'fa fa-fw fa-user-circle'),
+(22, 3, 'Home', 'mahasiswa', 1, 'fa fa-fw fa-user-circle'),
+(23, 4, 'Buku Pedoman', 'cordinator/buku_pedoman', 1, 'fas fa-fw fa-book'),
+(24, 5, 'Buku Pedoman', 'mahasiswa/buku_pedoman', 1, 'fas fa-fw fa-book'),
+(25, 6, 'Template Laporan Proyek', 'cordinator/templet_laporan_proyek', 1, 'far fa-fw fa-file-pdf'),
+(26, 7, 'Template Laporan Proyek', 'mahasiswa/templet_laporan_proyek', 1, 'far fa-fw fa-file-pdf'),
+(27, 8, 'Informasi Bimbingan ', 'dosen/informasi_bimbingan_proyek', 1, 'fa fa-fw fa-info'),
+(28, 9, 'Informasi Bimbingan ', 'mahasiswa/informasi_bimbingan_proyek', 1, 'fa fa-fw fa-info'),
+(29, 8, 'Presensi Bimbingan Proyek', 'dosen/persensi_bimbingan_proyek', 1, 'far fa-fw fa-calendar-check'),
+(30, 9, 'Presensi Bimbingan Proyek', 'mahasiswa/Persensi_Bimbingan_Proyek', 1, 'far fa-fw fa-calendar-check'),
+(31, 10, 'Proposal', 'cordinator/proposal', 1, 'fas fa-fw fa-align-center'),
+(32, 11, 'Proposal', 'mahasiswa/proposal', 1, 'fas fa-fw fa-align-center'),
+(33, 10, 'Laporan', 'cordinator/laporan', 1, 'fas fa-fw fa-align-justify'),
+(34, 11, 'Laporan', 'mahasiswa/laporan', 1, 'fas fa-fw fa-align-justify'),
+(35, 12, 'Surat Izin Sidang', 'dosen/surat_izin_sidang', 1, 'far fa-fw fa-envelope'),
+(36, 13, 'Surat Izin Sidang', 'mahasiswa/surat_izin_sidang', 1, 'far fa-fw fa-envelope'),
+(37, 14, 'Informasi Dosen ', 'cordinator/informasi_dosen_pembimbing', 1, 'fa fa-fw fa-info'),
+(38, 14, 'Informasi Mahasiswa ', 'cordinator/informasi_mahasiswa_pembimbing', 1, 'fas fa-fw fa-info-circle'),
+(39, 16, 'Akun Mahasiswa ', 'cordinator/akun_mahasiswa', 1, 'far fa-fw fa-user-circle'),
+(40, 14, 'Pembagian Pembimbing', 'cordinator/pembagian_pembimbing', 1, 'fas fa-fw fa-cubes'),
+(41, 15, 'Form Penilaian', 'dosen/form_penilayan', 1, 'fas fa-fw fa-table'),
+(42, 16, 'Proposal', 'cordinator/Proposal_hasil', 1, 'fas fa-fw fa-align-center'),
+(44, 16, 'Laporan', 'cordinator/laporan_hasil', 1, 'fas fa-fw fa-align-justify'),
+(45, 16, 'Presensi Bimbingan', 'cordinator/persensi_bimbingan', 1, 'far fa-fw fa-calendar-check'),
+(46, 16, 'Persetujuan Sidang', 'cordinator/setujui_sidang', 1, 'far fa-fw fa-envelope-open'),
+(47, 17, 'My Profile', 'cordinator/my_profile', 1, 'far fa-fw fa-user'),
+(48, 18, 'My Profile', 'dosen/my_profile', 1, 'far fa-fw fa-user'),
+(49, 19, 'My Profile', 'mahasiswa/my_profile', 1, 'far fa-fw fa-user'),
+(53, 17, 'Edit Profile', 'cordinator/edit_profile', 1, 'far fa-fw fa-address-card'),
+(54, 18, 'Edit Profile', 'dosen/edit_profile', 1, 'far fa-fw fa-address-card'),
+(55, 19, 'Edit Profile', 'mahasiswa/edit_profile', 1, 'far fa-fw fa-address-card'),
+(57, 16, 'Rekap Proyek', 'cordinator/rekap_proyek', 1, 'fas fa-fw fa-align-justify');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `berkas_bimbingan`
+--
+ALTER TABLE `berkas_bimbingan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bimbingan`
+--
+ALTER TABLE `bimbingan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mhs_aktif`
+--
+ALTER TABLE `mhs_aktif`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `status_judul`
+--
+ALTER TABLE `status_judul`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `status_proposal`
+--
+ALTER TABLE `status_proposal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `status_surat`
+--
+ALTER TABLE `status_surat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_access_menu`
+--
+ALTER TABLE `user_access_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_data`
+--
+ALTER TABLE `user_data`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `user_menu`
+--
+ALTER TABLE `user_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_role`
+--
+ALTER TABLE `user_role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_sub_menu`
+--
+ALTER TABLE `user_sub_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `berkas_bimbingan`
+--
+ALTER TABLE `berkas_bimbingan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+
+--
+-- AUTO_INCREMENT for table `bimbingan`
+--
+ALTER TABLE `bimbingan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+
+--
+-- AUTO_INCREMENT for table `mhs_aktif`
+--
+ALTER TABLE `mhs_aktif`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `status_judul`
+--
+ALTER TABLE `status_judul`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `status_proposal`
+--
+ALTER TABLE `status_proposal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `status_surat`
+--
+ALTER TABLE `status_surat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT for table `user_access_menu`
+--
+ALTER TABLE `user_access_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `user_data`
+--
+ALTER TABLE `user_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
+-- AUTO_INCREMENT for table `user_menu`
+--
+ALTER TABLE `user_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `user_role`
+--
+ALTER TABLE `user_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `user_sub_menu`
+--
+ALTER TABLE `user_sub_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
